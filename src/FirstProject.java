@@ -6,6 +6,6 @@ public class FirstProject {
     {
         String line = "Hello World";
         System.out.println(line);
-        System.out.println(5-3);
+        System.out.println(5/3);
     }
 }
