@@ -1,16 +1,24 @@
 package hw2;
 //Требуется удалить из строки повторяющиеся символы и все пробелы
+import java.util.LinkedHashSet;
 import java.util.Scanner;
 import java.lang.StringBuffer;
+
 public class Task10 {
     public static void main(String[] args) {
-        String str1;
+
+        //решаем двумя способами
+
+        String str;
         String symb;
         System.out.println("Введите строку");
         Scanner keyb = new Scanner(System.in);
-        str1 = keyb.nextLine();
-        str1 = str1.replace(" ","");
-        StringBuffer str_buf = new StringBuffer(str1);
+        str = keyb.nextLine();
+        str = str.replace(" ", "");
+
+        // Способ №1: чуть-чуть Java
+
+        StringBuffer str_buf = new StringBuffer(str);
         for (int i=0; i<str_buf.length(); i++){
             symb = str_buf.substring(i,i + 1);
             for (int j=i+1; j<str_buf.length(); j++){
@@ -19,6 +27,19 @@ public class Task10 {
                     str_buf.deleteCharAt(indx);
                     j = indx - 1;
                 }
+            }
+        }
+        System.out.println(str_buf);
+
+        // Способ №2: целиком Java
+        // свойство LinkedHashSet - можно добавить только неповторяющийся элемент, при этом сохранаятся порядок добавления
+
+        LinkedHashSet <Character> repeatIgnore = new LinkedHashSet<>();
+        str_buf = new StringBuffer();
+        char [] strToArr = str.toCharArray();
+        for (char tmp : strToArr){
+            if (repeatIgnore.add(tmp)){
+                str_buf.append(tmp);
             }
         }
         System.out.println(str_buf);
