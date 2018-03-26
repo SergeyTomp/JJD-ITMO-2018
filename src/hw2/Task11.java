@@ -11,6 +11,10 @@ public class Task11 {
         System.out.println("Введите строку");
         Scanner keyb = new Scanner(System.in);
         str = keyb.nextLine();
+        //делаем всё за один проход:
+        // заменяем все нецифровые символы на пробелы,
+        // обрезаем пустоты по краям
+        // разрезаем результат по пробелам, получаем массив строк из чисел
         String [] cleanRubbish = str.replaceAll("\\D+", " ").trim().split(" ");
         int [] result = new int[cleanRubbish.length];
         for (int i=0; i<result.length; i++) {
