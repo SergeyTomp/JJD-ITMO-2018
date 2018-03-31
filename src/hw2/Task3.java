@@ -9,7 +9,7 @@ public class Task3 {
         Random rand_num = new Random();
         int cntr=0;
         for (int i=0; i<rnd_num.length; i++){
-            rnd_num[i] = rand_num.nextInt(15);
+            rnd_num[i] = rand_num.nextInt(9);
             System.out.print(rnd_num[i] + " ");
             if (rnd_num[i]%2 == 0){cntr++;}//считаем нуль чётным
         }
