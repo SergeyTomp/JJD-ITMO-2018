@@ -16,6 +16,7 @@ public class Accum {
     }
 
     public static void main (String []args){
+
         //можно так, как на уроке, но непонятно зачем и перегржать метод нужно в двух местах, в Accum и Operation
         Accum acc = new Accum(new Plus());
         acc.accum(5, 3);
@@ -34,6 +35,7 @@ public class Accum {
         acc.accum(5, 9);
 
         //мне кажется лучше так, это проще и перегрузка метода только в Operation
+
         Operation oper = new Plus();
         oper.execute(7, 3);
         oper = new Sqrt();
