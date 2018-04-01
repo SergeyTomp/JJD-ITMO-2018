@@ -4,6 +4,7 @@ import java.util.PrimitiveIterator;
 
 public class Pupil extends Human{
 
+    // класс ученика
     private int level;          // год обучения
     private String classID;     // класс
     private int performance;    // характеристика прилежности

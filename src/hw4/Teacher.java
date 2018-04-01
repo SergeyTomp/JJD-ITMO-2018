@@ -1,5 +1,6 @@
 package hw4;
 
+// класс учитель
 public class Teacher extends Human {
     private String subject;     // что преподаёт
     private int severity;       //типа строгость

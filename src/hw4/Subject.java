@@ -1,6 +1,6 @@
 package hw4;
 
-// школьный предмет изучения
+// класс школьный предмет
 public class Subject {
     private String title;   // название
     private int level;      //год изучения

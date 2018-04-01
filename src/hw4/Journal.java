@@ -1,9 +1,15 @@
 package hw4;
 
 import java.util.Hashtable;
-
+// журнал класса
 public class Journal {
-    Hashtable <String, Integer> dayMark;            // дата - оценка
-    Hashtable <String, Hashtable> subjDayMark;      // предмет - дата - оценка
-    Hashtable <String, Hashtable> pupilSubjDayMark;  // ученик - предмет - дата - оценка
+    Hashtable <String, Integer> dayMark;            // табл. дата -> оценка
+    Hashtable <String, Hashtable> subjDayMark;      // табл. предметы -> (дата -> оценка)
+    Hashtable <String, Hashtable> pupilSubjDayMark; // табл. ученик -> (предметы -> (дата -> оценка))
+
+    Journal (){
+        dayMark = new Hashtable <>();
+        subjDayMark = new Hashtable <>();
+        pupilSubjDayMark = new Hashtable<>();
+    }
 }

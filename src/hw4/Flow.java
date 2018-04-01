@@ -3,9 +3,9 @@ package hw4;
 //класс, как постоянная группа учеников от поступления до окончания школы
 public class Flow {
 
-    private String classID;
-    private Teacher supervisor;
-    Journal flowJournal;
+    private String classID;         // идентификатор класса, 1А, 9Б и т.д.
+    private Teacher supervisor;     // классрук
+    Journal flowJournal;            // журнал класса, он же "база данных" класса
 
     Flow(Teacher supervisor, String classID, Journal flowJournal) {
         this.supervisor = supervisor;
