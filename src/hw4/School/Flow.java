@@ -1,4 +1,4 @@
-package hw4;
+package hw4.School;
 
 //класс, как постоянная группа учеников от поступления до окончания школы
 public class Flow {

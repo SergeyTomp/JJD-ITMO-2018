@@ -1,6 +1,4 @@
-package hw4;
-
-import java.util.PrimitiveIterator;
+package hw4.School;
 
 public class Pupil extends Human{
 

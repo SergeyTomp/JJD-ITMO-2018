@@ -1,4 +1,4 @@
-package hw4;
+package hw4.School;
 
 import java.util.Hashtable;
 // журнал класса

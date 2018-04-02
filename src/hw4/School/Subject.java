@@ -1,4 +1,4 @@
-package hw4;
+package hw4.School;
 
 // класс школьный предмет
 public class Subject {

@@ -1,4 +1,4 @@
-package hw4;
+package hw4.School;
 
 // класс учитель
 public class Teacher extends Human {

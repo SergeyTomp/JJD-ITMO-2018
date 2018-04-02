@@ -1,4 +1,4 @@
-package hw4;
+package hw4.School;
 
 public class Human {
     protected int age;          // возраст
