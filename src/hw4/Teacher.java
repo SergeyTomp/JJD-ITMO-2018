@@ -15,21 +15,6 @@ public class Teacher extends Human {
         this.experience = experience;
     }
 
-    public String getName(){
-       return name;
-    }
-
-    public int getAge (){
-        return age;
-    }
-
-    public String getGender(){
-        return gender;
-    }
-
-    public void setAge (int age){
-        this.age = age;
-    }
     public String getSubject() {
         return subject;
     }

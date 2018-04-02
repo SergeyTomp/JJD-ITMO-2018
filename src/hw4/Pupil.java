@@ -20,16 +20,6 @@ public class Pupil extends Human{
         this.discipline = discipline;
     }
 
-    public String getName(){
-        return name;
-    }
-
-    public int getAge (){
-        return age;
-    }
-    public void setAge(){
-        super.age = age;
-    }
     public int getLevel() {
         return level;
     }
