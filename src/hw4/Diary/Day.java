@@ -9,24 +9,35 @@ public class Day {
     private ArrayList<Note> dayList;
 
     Day (int weekDay){
-        dayList = new ArrayList<>();
+        this.dayList = new ArrayList<>();
         this.weekDay = weekDay;
+    }
+
+    void setDayTask (Note task){
+        dayList.add (task);
     }
 
     void getDayTaskList (){
         Iterator <Note> iterat = dayList.iterator();
         while(iterat.hasNext()){
-            System.out.println(iterat.next());
+            iterat.next().printTask();
         }
     }
 
-    void setDayTaskList (Note task){
-        dayList.add (task);
+    Note getTask(int taskNum){
+        return dayList.get(taskNum);
     }
 
-    public int getWeekDay(){
-        return weekDay;
+    public String getWeekDay(){
+        switch (weekDay){
+            case 1: return "Понедельник";
+            case 2: return "Вторник";
+            case 3: return "Среда";
+            case 4: return "Четверг";
+            case 5: return "Пятница";
+            case 6: return "Суббота";
+            case 7: return "Воскресенье";
+            default: return "другой день";
+        }
     }
-
-
 }

@@ -1,16 +1,19 @@
 package hw4.Diary;
 
-import java.lang.reflect.Array;
-
 public class Week {
 
+    int weekNumb;
     Day [] week;
 
-    Week (){
-        week = new Day[7];
-    }
+    Week (int weekNumb){
+        this.weekNumb = weekNumb;
+        this.week = new Day[7];
+        for (int i = 0; i < 7; i++){
+            week [i] = new Day (i + 1);
+        }
 
-    void addDay (Day day){
-        week [day.getWeekDay() - 1] = day;
     }
-}
+    public Day getDay (int dayNum){
+        return week [dayNum - 1];
+    }
+ }

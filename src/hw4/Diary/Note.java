@@ -1,6 +1,5 @@
 package hw4.Diary;
 
-
 public class Note {
 
     private String task;
@@ -22,6 +21,6 @@ public class Note {
     }
 
     void copyTask(Day day){
-        day.setTaskList(new Note(task));
+        day.setDayTask(new Note(task));
     }
 }
