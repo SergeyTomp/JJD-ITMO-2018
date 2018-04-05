@@ -1,9 +1,9 @@
 package hw5;
 import java.io.*;
 
-class XmlHandler extends FileHandler {
+class TxtHandler extends FileHandler {
 
-    XmlHandler(String pathFileName){
+    TxtHandler(String pathFileName){
         super(pathFileName);
     }
     @Override                                               //в общем случае метод может быть переопределён, условно покажем это
@@ -13,6 +13,7 @@ class XmlHandler extends FileHandler {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+
         String line;
         while ((line = br.readLine()) != null){
             System.out.println(line);

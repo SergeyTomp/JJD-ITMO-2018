@@ -1,11 +1,7 @@
 package hw5;
+import java.io.*;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
-
-public class JsonHandler extends FileHandler {
+ class JsonHandler extends FileHandler {
 
     JsonHandler(String pathFileName){
         super(pathFileName);
@@ -18,8 +14,9 @@ public class JsonHandler extends FileHandler {
             e.printStackTrace();
         }
 
-        while (br.readLine() != null){
-            System.out.println(br.readLine());
+        String line;
+        while ((line = br.readLine()) != null){
+            System.out.println(line);
         }
     }
 }
