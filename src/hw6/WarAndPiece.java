@@ -120,15 +120,15 @@ public class WarAndPiece {
         while (enumer.hasMoreElements()){
             lettersQty = lettersQty + letters.get(enumer.nextElement());
         }
-        System.out.println(lettersQty);
+        System.out.println("Всего букв " + lettersQty);
 
 
         Enumeration<String> enumer2 = letters.keys();
         String key;
-        double percent;
+        float percent;
         while (enumer2.hasMoreElements()){
             key = enumer2.nextElement();
-            percent = 100 * letters.get(key) / lettersQty;
+            percent = 100 * (float)letters.get(key) / (float)lettersQty;
             System.out.println("Буква " + key + " встречается " + letters.get(key) + " раз, " + percent + "%");
 
         }
