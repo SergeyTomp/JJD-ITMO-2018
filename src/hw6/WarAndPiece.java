@@ -122,6 +122,7 @@ public class WarAndPiece {
         }
         System.out.println(lettersQty);
 
+
         Enumeration<String> enumer2 = letters.keys();
         String key;
         double percent;
