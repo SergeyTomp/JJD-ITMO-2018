@@ -23,7 +23,7 @@ public class WarAndPiece {
 
         for (String str : lines){
 //            str = str.replaceAll(pattern, replacement);                 //не получается убрать пустые строки
-            String [] cleanRubbish = str.toLowerCase().replaceAll("\\p{Punct}","").trim().split("\\s+");
+            String [] cleanRubbish = str.toLowerCase().replaceAll("\\p{Punct}"," ").trim().split("\\s+");
             for (int i = 0; i < cleanRubbish.length; i++){
                 wordsLst.add(cleanRubbish[i]);
             }
@@ -116,12 +116,20 @@ public class WarAndPiece {
         }
 
         Enumeration<String> enumer = letters.keys();
+        int lettersQty = 0;
+        while (enumer.hasMoreElements()){
+            lettersQty = lettersQty + letters.get(enumer.nextElement());
+        }
+        System.out.println(lettersQty);
+
+        Enumeration<String> enumer2 = letters.keys();
         String key;
         double percent;
-        while (enumer.hasMoreElements()){
-            key = enumer.nextElement();
-            percent = 100 * letters.get(key) / lttrsLst.size();
+        while (enumer2.hasMoreElements()){
+            key = enumer2.nextElement();
+            percent = 100 * letters.get(key) / lettersQty;
             System.out.println("Буква " + key + " встречается " + letters.get(key) + " раз, " + percent + "%");
+
         }
     }
 }
