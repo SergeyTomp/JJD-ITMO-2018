@@ -1,5 +1,4 @@
 package hw6_Improve;
-//тестируем на урезанном файле wpcut
 
 import java.io.File;
 import java.io.IOException;
