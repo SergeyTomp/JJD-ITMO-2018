@@ -45,6 +45,8 @@ public class WordProcessor {
     }
 
     void showFrequentWords (int n){
+        System.out.println();
+        System.out.println("Частота встречаемости слов");
         //сортируем ArrayList по частоте встречаемости слов
         // в какую сторону сортировка зависит от настройки компаратора
         Collections.sort(sortedLst, new QtyComparator());
@@ -77,6 +79,8 @@ public class WordProcessor {
 
     void showWordGroups (){
         groupsPrepare();
+        System.out.println();
+        System.out.println("Группировка слов по количеству букв");
         //выводим все массивы со словами
         int j = 0;
         for (ArrayList arr : wordsByLength) {
@@ -86,6 +90,8 @@ public class WordProcessor {
     }
 
     void showWordGroupsExclude (String [] except){
+        System.out.println();
+        System.out.println("Группировка слов по количеству букв за вычетом слов, заданных в перечне исключений");
         groupsPrepare();
         ArrayList<String> specWords = new ArrayList<>();
         Collections.addAll(specWords, except);
