@@ -17,8 +17,6 @@ public class LetterProcessor {
         letters = new Hashtable<>();
         lettersQty = 0;
 
-        lttrsLst = new ArrayList<>();
-        letters = new Hashtable<>();
         for (String lttrs : lines){
             String [] lttrsOnly = lttrs.toLowerCase()
                     .replaceAll("[\\p{Punct}\\s\\d]+","")
@@ -43,10 +41,13 @@ public class LetterProcessor {
     }
 
     void countLetters (){
+        System.out.println();
         System.out.println("Всего букв " + lettersQty);
     }
 
     void lettersPercents (){
+        System.out.println();
+        System.out.println("Частота встречаемости букв");
         Enumeration<String> enumer = letters.keys();
         String key;
         float percent;
@@ -54,7 +55,6 @@ public class LetterProcessor {
             key = enumer.nextElement();
             percent = 100 * (float)letters.get(key) / (float)lettersQty;
             System.out.println("Буква " + key + " встречается " + letters.get(key) + " раз, " + percent + "%");
-
         }
     }
 }
