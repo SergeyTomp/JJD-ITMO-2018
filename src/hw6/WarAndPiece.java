@@ -18,11 +18,8 @@ public class WarAndPiece {
 
 
 //переводим в нижний регистр, обрезаем пробелы по концам, удаляем знаки препинания, режем на слова и в массив
-//        String pattern = "(?m)^\\s*\\r?\\n|\\r?\\n\\s*(?!.*\\r?\\n)"; //не получается убрать пустые строки
-//        String replacement = "";
 
         for (String str : lines){
-//            str = str.replaceAll(pattern, replacement);                 //не получается убрать пустые строки
             String [] cleanRubbish = str.toLowerCase().replaceAll("\\p{Punct}"," ").trim().split("\\s+");
             for (int i = 0; i < cleanRubbish.length; i++){
                 wordsLst.add(cleanRubbish[i]);
@@ -52,6 +49,7 @@ public class WarAndPiece {
         Collections.sort(sortedLst, new QtyComparator());
 
         // выводим первые 10 элементов массива, там наиболлее часто встечающиеся слова
+        System.out.println();
         Iterator<Word> iter = sortedLst.iterator();
         int i = 0;
         Word nextElem;
@@ -75,6 +73,7 @@ public class WarAndPiece {
             wordsByLength[elem.getLttrNum()].add(elem.getWord());
         }
         //выводим все массивы со словами
+        System.out.println();
         int j = 0;
         for (ArrayList arr : wordsByLength) {
             System.out.println("Слова с количеством букв - " + j + " " + arr);
@@ -89,6 +88,8 @@ public class WarAndPiece {
         for (Word elem : sortedLst){
             wordsByLength[elem.getLttrNum()].removeAll(specWords);
         }
+
+        System.out.println();
         j = 0;
         for (ArrayList arrexc : wordsByLength) {
             System.out.println("Слова с количеством букв - " + j + " " + arrexc);
@@ -122,7 +123,7 @@ public class WarAndPiece {
         }
         System.out.println("Всего букв " + lettersQty);
 
-
+        System.out.println();
         Enumeration<String> enumer2 = letters.keys();
         String key;
         float percent;
