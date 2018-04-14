@@ -1,4 +1,4 @@
-package hw6_Improve;
+package hw6;
 
 import java.io.File;
 import java.io.IOException;
