@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Lesson9task {
-//для каждой строки
-//перервести внижний регистр
-//убрать пробеля в начале и конце
-//поместить в коллекцию непустые слова
+// для каждой строки
+// перервести внижний регистр
+// убрать пробеля в начале и конце
+// поместить в коллекцию непустые слова
    public static void main(String[] args) throws IOException {
        File txt = new File("src/hw6/wpcut.txt");
        List<String> lines = Files.readAllLines(txt.toPath());
