@@ -5,6 +5,7 @@ public class TestingLists {
         MyLinkedList <String> myList = new MyLinkedList<>();
         MyQueue <String> myQueue = new MyQueue<>();
         MyStack <String> myStack = new MyStack<>();
+        //раскомментировать нужную част для проверки
 //        myList.addElem("zero");
 //        myList.addElem("one");
 //        myList.addElem("two");
