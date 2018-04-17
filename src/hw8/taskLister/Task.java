@@ -1,6 +1,6 @@
 package hw8.taskLister;
 
-public class Task {
+public class Task{
 
     private String taskText;
     private String startDate;
