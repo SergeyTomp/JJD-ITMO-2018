@@ -15,19 +15,24 @@ public class Task{
     String getContent (){
         return taskText;
     }
+
     String getStartDate (){
         return startDate;
     }
+
     String getEndDate (){
         return deadLine;
     }
+
     String getStatus (){
         return status;
     }
+
     boolean setStatus (String stat){
         status = stat;
         return true;
     }
+
     boolean setDeadLine (String date){
         deadLine = date;
         return true;
