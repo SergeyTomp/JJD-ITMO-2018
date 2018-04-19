@@ -18,4 +18,5 @@ public class CommandLines {
     public static final String NEW = "new";
     public static final String IN_WORK = "in work";
     public static final String DONE = "done";
+    public static final String CHANGE_STAT = "change status";
 }

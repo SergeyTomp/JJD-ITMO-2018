@@ -3,21 +3,20 @@ package hw8.taskLister;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
+
 import static hw8.taskLister.CommandLines.*;
 
 public class Worker extends Staff {
 
-    private Map<String, Handler> commands;
-    private ArrayList <Task> taskList;
-
-    class ComList implements Handler{
-        @Override
-        public void make(){
-            for (Map.Entry entry : commands.entrySet()){
-                System.out.println(entry.getKey());
-            }
-        }
-    }
+//    class ComList implements Handler{
+//        @Override
+//        public void make(){
+//            for (Map.Entry entry : commands.entrySet()){
+//                System.out.println(entry.getKey());
+//            }
+//        }
+//    }
     class ShowNew implements Handler{
         @Override
         public void make () {
@@ -61,8 +60,10 @@ public class Worker extends Staff {
     }
     class Take implements Handler{
         @Override
-        public void make (){}
-        public void make (String str){
+        public void make (){
+            Scanner scaner = new Scanner(System.in);
+            System.out.println("Введите задачу");
+            String str = scaner.nextLine();
             for (Task tsk : taskList){
                 if(tsk.getContent().equals(str)){
                     tsk.setStatus(IN_WORK);
@@ -76,6 +77,9 @@ public class Worker extends Staff {
         @Override
         public void make (){}
         public void make (String str){
+            Scanner scaner = new Scanner(System.in);
+            System.out.println("Введите задачу");
+            str = scaner.nextLine();
             for (Task tsk : taskList){
                 if(tsk.getContent().equals(str)){
                     tsk.setStatus(DONE);
@@ -84,25 +88,25 @@ public class Worker extends Staff {
             }
         }
     }
-    class Close implements Handler{
-        @Override
-        public void make (){
-            System.exit(0);
-        }
-    }
-    class Exit implements Handler{
-        @Override
-        public void make(){
-
-        }
-    }
+//    class Close implements Handler{
+//        @Override
+//        public void make (){
+//            System.exit(0);
+//        }
+//    }
+//    class Exit implements Handler{
+//        @Override
+//        public void make(){
+//
+//        }
+//    }
 
     Worker (String name, String pass, String access){
         super.name = name;
         super.pass = pass;
         super.access = access;
-        taskList = new ArrayList<>();
-        commands = new HashMap<>();
+        super.taskList = new ArrayList<>();
+        super.commands = new HashMap<>();
         commands.put(COMMANDS,new ComList());
         commands.put(EXIT, new Exit());
         commands.put(CLOSE, new Close());
