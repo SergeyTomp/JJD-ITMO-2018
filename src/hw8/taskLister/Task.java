@@ -28,7 +28,7 @@ public class Task{
         status = stat;
         return true;
     }
-    boolean setDeadLine (String date){
+    boolean setEndDate (String date){
         deadLine = date;
         return true;
     }
