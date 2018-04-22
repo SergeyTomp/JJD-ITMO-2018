@@ -25,7 +25,7 @@ public class Validator {
             AccessLevel.valueOf(access);
         }
         catch (IllegalArgumentException e) {
-            System.out.println("Некорректный идентификатор доступа");
+            System.out.println("Некорректный идентификатор доступа!");
             return false;
         }
         return true;
@@ -44,6 +44,16 @@ public class Validator {
             || Integer.parseInt(splitted [2]) <  1000
             || Integer.parseInt(splitted [2]) > 2100) {
             System.out.println("Некорректный формат даты!");
+            return false;
+        }
+        return true;
+    }
+    static boolean statusCheck(String status){
+        try {
+            CommandStrings.valueOf(status);
+        }
+        catch (IllegalArgumentException e) {
+            System.out.println("Некорректный идентификатор статуса!");
             return false;
         }
         return true;

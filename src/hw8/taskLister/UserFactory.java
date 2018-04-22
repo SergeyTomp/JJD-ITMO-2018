@@ -11,7 +11,13 @@ public class UserFactory extends Staff{
 
     UserFactory (String name, String pass, String access, Map staffList) {
         super.access = access;
+        if (pass.isEmpty()){
+            throw new DataException(DataErrors.PASSWORD_BAD.getMessage());
+        }
         super.pass = pass;
+        if (name.isEmpty()){
+            throw new DataException(DataErrors.NAME_ERROR.getMessage());
+        }
         super.name = name;
         super.taskList = new ArrayList<>();
         super.commands = new HashMap<>();

@@ -81,16 +81,31 @@ public class Staff {
     class DeleteTask implements Handler{
         @Override
         public boolean make (){
-            String user, tsk;
+            String user = null, tsk;
             Scanner scan = new Scanner(System.in);
-            System.out.println("Введите имя пользователя");
-            user = scan.nextLine();
-            System.out.println("Введите задачу");
-            tsk = scan.nextLine();
-            Iterator<Task> iter =  staffList.get(user).taskList.iterator();
-            while (iter.hasNext()){
-                if(iter.next().getContent().equals(tsk)){
-                    iter.remove();
+            boolean checkPassed = false;
+            while (!checkPassed) {
+                System.out.println("Введите имя пользователя");
+                user = scan.nextLine();
+                if (!(checkPassed = staffList.containsKey(user))){
+                    System.out.println("Пользователь не найден!");
+                }
+            }
+            checkPassed = false;
+            Task task;
+            while (!checkPassed){
+                System.out.println("Введите задачу");
+                tsk = scan.nextLine();
+                Iterator <Task> iter =  staffList.get(user).taskList.iterator();
+                while (iter.hasNext()){
+                    task = iter.next();
+                    if(task.getContent().equals(tsk)){
+                        iter.remove();
+                        checkPassed = true;
+                    }
+                }
+                if(!checkPassed){
+                    System.out.println("Задача не найдена!");
                 }
             }
             return true;
@@ -99,10 +114,16 @@ public class Staff {
     class RemoveWorker implements Handler{
         @Override
         public boolean make (){
-            String user;
+            String user = null;
             Scanner scan = new Scanner(System.in);
-            System.out.println("Введите имя пользователя");
-            user = scan.nextLine();
+            boolean checkPassed = false;
+            while (!checkPassed) {
+                System.out.println("Введите имя пользователя");
+                user = scan.nextLine();
+                if (!(checkPassed = staffList.containsKey(user))){
+                    System.out.println("Пользователь не найден!");
+                }
+            }
             staffList.remove(user);
             return true;
         }
@@ -110,22 +131,41 @@ public class Staff {
     class ChangeStat implements Handler{
         @Override
         public boolean make (){
-            String user, tsk, stat;
+            String user = null, tsk, stat = null;
             Scanner scan = new Scanner(System.in);
-            System.out.println("Введите имя пользователя");
-            user = scan.nextLine();
-            System.out.println("Введите задачу");
-            tsk = scan.nextLine();
-            System.out.println("Введите статус");
-            stat = scan.nextLine();
-            Iterator <Task> iter =  staffList.get(user).taskList.iterator();
-            Task str;
-            while (iter.hasNext()){
-                str = iter.next();
-                if(str.getContent().equals(tsk)){
-                    str.setStatus(stat);
+            boolean checkPassed = false;
+            while (!checkPassed) {
+                System.out.println("Введите имя пользователя");
+                user = scan.nextLine();
+                if (!(checkPassed = staffList.containsKey(user))){
+                    System.out.println("Пользователь не найден!");
                 }
             }
+            checkPassed = false;
+            Task task = null;
+            while (!checkPassed){
+                System.out.println("Введите задачу");
+                tsk = scan.nextLine();
+                Iterator <Task> iter =  staffList.get(user).taskList.iterator();
+                while (iter.hasNext()){
+                    task = iter.next();
+                    if(task.getContent().equals(tsk)){
+                        iter.remove();
+                        checkPassed = true;
+                    }
+                }
+                if(!checkPassed){
+                    System.out.println("Задача не найдена!");
+                }
+            }
+            checkPassed = false;
+            while (!checkPassed){
+                System.out.println("Введите статус");
+                stat = scan.nextLine();
+                checkPassed = Validator.statusCheck(stat);
+            }
+            task.setStatus(stat);
+            System.out.println("Успешно");
             return true;
         }
     }
