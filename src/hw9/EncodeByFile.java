@@ -1,23 +1,25 @@
 package hw9;
 
 import java.io.*;
-// не работает декодирование
+
 public class EncodeByFile {
     static void encodeDecodeByFile(File source, File encoded, File key)throws IOException {
 
         try (InputStream is = new BufferedInputStream(new FileInputStream(source));
              InputStream coder = new BufferedInputStream(new FileInputStream(key));
              OutputStream os = new BufferedOutputStream(new FileOutputStream(encoded))){
+
             long keyLen = key.length();
             coder.mark((int) keyLen);
             int fromSource, fromKey;
             long index = 0;
-            while((fromSource = is.read()) > 0){
+            while((fromSource =  is.read()) != -1){
                 if (++ index > keyLen){
                     index = 0;
                     coder.reset();
+
                 }
-                fromKey = coder.read();
+                fromKey =  coder.read();
                 os.write(fromSource ^ fromKey);
 
             }
