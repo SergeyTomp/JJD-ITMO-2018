@@ -3,31 +3,31 @@ package hw10.tempAlarm;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Sensor implements Notifier {
-    private List observers;
+public class Sensor implements Informer {
+    private List listeners;
     private int temperature;
 
     public Sensor() {
-        observers = new ArrayList();
+        listeners = new ArrayList();
     }
 
     @Override
     public void addAlarm(TempAlarm sens) {
-        observers.add(sens);
+        listeners.add(sens);
     }
 
     @Override
     public void removeAlarm(TempAlarm obs) {
-        int i = observers.indexOf(obs);
+        int i = listeners.indexOf(obs);
         if (i >= 0) {
-            observers.remove(i);
+            listeners.remove(i);
         }
     }
 
     @Override
     public void notifyAlarm() {
-        for (int i = 0; i < observers.size(); i++) {
-            Observer obs = (Observer) observers.get(i);
+        for (int i = 0; i < listeners.size(); i++) {
+            Listener obs = (Listener) listeners.get(i);
             obs.update(temperature);
         }
     }

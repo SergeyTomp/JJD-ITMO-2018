@@ -1,5 +1,5 @@
 package hw10.tempAlarm;
 
-public interface Observer {
+public interface Listener {
     public void update (int temperature);
 }
