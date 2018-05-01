@@ -15,10 +15,6 @@ public enum CommandStrings {
     SHOW_CHECKED ("SHOW_CHECKED"),
     TAKE_TASK ("TAKE_TASK"),
     MARK_AS_DONE ("MARK_AS_DONE"),
-    NEW ("NEW"),
-    IN_WORK ("Статус: в работе"),
-    CHECKED ("CHECKED"),
-    DONE ("DONE"),
     CHANGE_STATUS ("CHANGE_STATUS");
 
     String s;

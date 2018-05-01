@@ -2,6 +2,8 @@ package taskManager;
 
 import java.util.*;
 import static taskManager.CommandStrings.*;
+import static taskManager.TaskStatus.*;
+
 
 public class CommandFactory {
 
@@ -173,7 +175,7 @@ public class CommandFactory {
                 while (!checkPassed) {
                     System.out.println("Введите статус");
                     try {
-                        task.setStatus(CommandStrings.valueOf(scan.nextLine()));
+                        task.setStatus(TaskStatus.valueOf(scan.nextLine()));
                         System.out.println("Успешно");
                         checkPassed = true;
                     }

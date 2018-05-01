@@ -7,9 +7,9 @@ public class Task{
 //    private LocalDate startDate;
     private String deadLine;
 //    private LocalDate deadLine;
-    private CommandStrings status;
+    private TaskStatus status;
 //    Task (String taskText, LocalDate startDate, LocalDate deadLine, String status){
-    Task (String taskText, String startDate, String deadLine, CommandStrings status){
+    Task (String taskText, String startDate, String deadLine, TaskStatus status){
         this.taskText = taskText;
         this.startDate = startDate;
         this.deadLine = deadLine;
@@ -26,10 +26,10 @@ public class Task{
     String getEndDate (){
         return deadLine;
     }
-    CommandStrings getStatus (){
+    TaskStatus getStatus (){
         return status;
     }
-    boolean setStatus (CommandStrings stat){
+    boolean setStatus (TaskStatus stat){
         status = stat;
         return true;
     }
