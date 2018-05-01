@@ -1,6 +1,7 @@
 package taskManager;
 
 import java.util.*;
+import static taskManager.CommandStrings.*;
 
 public class CommandFactory {
 
@@ -23,7 +24,8 @@ public class CommandFactory {
         class CreateWorker implements Handler {
             @Override
             public boolean make(Staff operator) {
-                String pass, access = null, user = null;
+                String pass, user = null;
+                AccessLevel access = null;
                 boolean checkPassed = false;
                 Scanner scan = new Scanner(System.in);
                 while (!checkPassed) {
@@ -36,8 +38,14 @@ public class CommandFactory {
                 checkPassed = false;
                 while (!checkPassed) {
                     System.out.println("Введите доступ");
-                    access = scan.nextLine();
-                    checkPassed = Validator.accessCheck(access);
+                    try {
+                        access = AccessLevel.valueOf(scan.nextLine());
+                        checkPassed = true;
+                    }
+                    catch (IllegalArgumentException e) {
+                        System.out.println("Некорректный идентификатор доступа!");
+                        checkPassed = false;
+                    }
                 }
                 operator.staffList.put(user, new Staff(user, pass, access, operator.staffList, operator.accessTable));
                 return true;
@@ -77,7 +85,7 @@ public class CommandFactory {
                     checkPassed = Validator.dateCheck(end);
                 }
 //             end = LocalDate.parse(tmp, DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"));
-                operator.staffList.get(user).taskList.add(new Task(tsk, start, end, CommandStrings.NEW.s));
+                operator.staffList.get(user).taskList.add(new Task(tsk, start, end, NEW));
                 return true;
             }
         }
@@ -134,7 +142,7 @@ public class CommandFactory {
         class ChangeStat implements Handler {
             @Override
             public boolean make(Staff operator) {
-                String user = null, tsk, stat = null;
+                String user = null, tsk;
                 Scanner scan = new Scanner(System.in);
                 boolean checkPassed = false;
                 while (!checkPassed) {
@@ -164,11 +172,15 @@ public class CommandFactory {
                 checkPassed = false;
                 while (!checkPassed) {
                     System.out.println("Введите статус");
-                    stat = scan.nextLine();
-                    checkPassed = Validator.statusCheck(stat);
+                    try {
+                        task.setStatus(CommandStrings.valueOf(scan.nextLine()));
+                        System.out.println("Успешно");
+                        checkPassed = true;
+                    }
+                    catch (IllegalArgumentException e) {
+                        System.out.println("Некорректный идентификатор статуса!");
+                    }
                 }
-                task.setStatus(stat);
-                System.out.println("Успешно");
                 return true;
             }
         }
@@ -188,7 +200,7 @@ public class CommandFactory {
         class ComList implements Handler {
             @Override
             public boolean make(Staff operator) {
-                for (CommandStrings com : operator.accessTable.get(AccessLevel.valueOf(operator.access))) {
+                for (CommandStrings com : operator.accessTable.get(operator.access)) {
                     System.out.println(com);
                 }
                 return true;
@@ -198,7 +210,7 @@ public class CommandFactory {
             @Override
             public boolean make(Staff operator) {
                 for (Task tsk : operator.taskList) {
-                    if (tsk.getStatus().equals(CommandStrings.NEW.s)) {
+                    if (tsk.getStatus().equals(NEW)) {
                         System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate() + " Complete " + tsk.getEndDate());
 //                    System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate().format( DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"))
 //                                                        + " Complete " + tsk.getEndDate().format( DateTimeFormatter. ofPattern ("dd'.'MM'.'yyyy"));
@@ -211,7 +223,7 @@ public class CommandFactory {
             @Override
             public boolean make(Staff operator) {
                 for (Task tsk : operator.taskList) {
-                    if (tsk.getStatus().equals(CommandStrings.DONE.s)) {
+                    if (tsk.getStatus().equals(DONE)) {
                         System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate() + " Complete " + tsk.getEndDate());
 //                    System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate().format( DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"))
 //                                                        + " Complete " + tsk.getEndDate().format( DateTimeFormatter. ofPattern ("dd'.'MM'.'yyyy"));
@@ -225,7 +237,7 @@ public class CommandFactory {
             @Override
             public boolean make(Staff operator) {
                 for (Task tsk : operator.taskList) {
-                    if (tsk.getStatus().equals(CommandStrings.IN_WORK.s)) {
+                    if (tsk.getStatus().equals(IN_WORK)) {
                         System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate() + " Complete " + tsk.getEndDate());
 //                    System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate().format( DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"))
 //                                                        + " Complete " + tsk.getEndDate().format( DateTimeFormatter. ofPattern ("dd'.'MM'.'yyyy"));
@@ -238,7 +250,7 @@ public class CommandFactory {
             @Override
             public boolean make(Staff operator) {
                 for (Task tsk : operator.taskList) {
-                    if (tsk.getStatus().equals(CommandStrings.SHOW_CHECKED.s)) {
+                    if (tsk.getStatus().equals(CHECKED)) {
                         System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate() + " Complete " + tsk.getEndDate());
 //                    System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate().format( DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"))
 //                                                        + " Complete " + tsk.getEndDate().format( DateTimeFormatter. ofPattern ("dd'.'MM'.'yyyy"));
@@ -255,7 +267,7 @@ public class CommandFactory {
                 String str = scaner.nextLine();
                 for (Task tsk : operator.taskList) {
                     if (tsk.getContent().equals(str)) {
-                        tsk.setStatus(CommandStrings.IN_WORK.s);
+                        tsk.setStatus(IN_WORK);
                         System.out.println("Статус: в работе");
                     }
                 }
@@ -271,7 +283,7 @@ public class CommandFactory {
                 String str = scaner.nextLine();
                 for (Task tsk : operator.taskList) {
                     if (tsk.getContent().equals(str)) {
-                        tsk.setStatus(CommandStrings.DONE.s);
+                        tsk.setStatus(DONE);
                         System.out.println("completed");
                     }
                 }

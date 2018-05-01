@@ -1,8 +1,5 @@
 package taskManager;
 
-import hw8.taskLister.AccessLevel;
-import hw8.taskLister.CommandStrings;
-
 import java.text.NumberFormat;
 import java.text.ParsePosition;
 
@@ -22,16 +19,16 @@ public class Validator {
        }
        return true;
     }
-    static boolean accessCheck (String access){
-        try {
-            AccessLevel.valueOf(access);
-        }
-        catch (IllegalArgumentException e) {
-            System.out.println("Некорректный идентификатор доступа!");
-            return false;
-        }
-        return true;
-    }
+//    static boolean accessCheck (AccessLevel access){
+//        try {
+//            AccessLevel.valueOf(access);
+//        }
+//        catch (IllegalArgumentException e) {
+//            System.out.println("Некорректный идентификатор доступа!");
+//            return false;
+//        }
+//        return true;
+//    }
     static boolean dateCheck(String date){
         String[] splitted = date.trim().split("\\.");
         if (splitted.length != 3
@@ -49,14 +46,14 @@ public class Validator {
         }
         return true;
     }
-    static boolean statusCheck(String status){
-        try {
-            CommandStrings.valueOf(status);
-        }
-        catch (IllegalArgumentException e) {
-            System.out.println("Некорректный идентификатор статуса!");
-            return false;
-        }
-        return true;
-    }
+//    static boolean statusCheck(String status){
+//        try {
+//            CommandStrings.valueOf(status);
+//        }
+//        catch (IllegalArgumentException e) {
+//            System.out.println("Некорректный идентификатор статуса!");
+//            return false;
+//        }
+//        return true;
+//    }
 }

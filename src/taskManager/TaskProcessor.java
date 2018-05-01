@@ -43,15 +43,27 @@ public class TaskProcessor {
 
             while (login) {
                 System.out.println("Введите команду:");
-                String data = scaner.nextLine();
-//                try {
-
-                    if (login = operator.accessTable.get(AccessLevel.valueOf(operator.access)).contains(CommandStrings.valueOf(data))){
-                        login = CommandFactory.getHandler(CommandStrings.valueOf(data)).make(operator);
+                try{
+                    CommandStrings data = CommandStrings.valueOf(scaner.nextLine());
+                    if (operator.accessTable.get(operator.access).contains(data)){
+                        login = CommandFactory.getHandler(data).make(operator);
                     }
                     else {
                         System.out.println("У вас нет доступа");
                     }
+                }
+                catch (IllegalArgumentException e){
+                    System.out.println("Введена несуществующая команда");
+                }
+//
+////                try {
+//
+//                    if (login = operator.accessTable.get(operator.access).contains(data)){
+//                        login = CommandFactory.getHandler(data).make(operator);
+//                    }
+//                    else {
+//                        System.out.println("У вас нет доступа");
+//                    }
 
 //                }
 //                catch (IllegalArgumentException e){

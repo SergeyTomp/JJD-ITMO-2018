@@ -6,12 +6,12 @@ public class Staff {
 
     protected String name;
     protected String pass;
-    protected String access;
+    protected AccessLevel access;
     protected ArrayList<Task> taskList;
     protected Map <String, Staff> staffList;
     protected Map <AccessLevel, ArrayList<CommandStrings>>accessTable;
 
-    public Staff (String name, String pass, String access, Map staffList, Map accessTable){
+    public Staff (String name, String pass, AccessLevel access, Map staffList, Map accessTable){
         this.access = access;
         if (pass.isEmpty()){
             throw new DataException(DataErrors.PASSWORD_BAD.getMessage());
@@ -31,7 +31,7 @@ public class Staff {
     String getPass(){
         return pass;
     }
-    String getAccess (){
+    Enum getAccess (){
         return access;
     }
     public void setName(String name) {
@@ -40,7 +40,7 @@ public class Staff {
     public void setPass(String pass) {
         this.pass = pass;
     }
-    public void setAccess(String access) {
+    public void setAccess(AccessLevel access) {
         this.access = access;
     }
 }

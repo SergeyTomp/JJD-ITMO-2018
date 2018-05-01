@@ -17,6 +17,7 @@ public enum CommandStrings {
     MARK_AS_DONE ("MARK_AS_DONE"),
     NEW ("NEW"),
     IN_WORK ("Статус: в работе"),
+    CHECKED ("CHECKED"),
     DONE ("DONE"),
     CHANGE_STATUS ("CHANGE_STATUS");
 

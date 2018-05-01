@@ -15,7 +15,7 @@ public class Company {
     Company() {
         staffList = new HashMap<>();
         accessTable = new HashMap<>();
-        Staff admin_1 = new Staff("admin", "123", "ADMIN", staffList, accessTable);
+        Staff admin_1 = new Staff("admin", "123", ADMIN, staffList, accessTable);
         staffList.put ("admin", admin_1);
 
         accessTable.put(ADMIN, new ArrayList<>());
