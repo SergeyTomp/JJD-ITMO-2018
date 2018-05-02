@@ -15,11 +15,13 @@ public class CommandFactory {
             @Override
             public int make(Staff operator) {
                 for (Map.Entry entry : operator.staffList.entrySet()) {
-                    System.out.println(entry.getKey());
-                    for (Task tsk : operator.staffList.get(entry.getKey()).taskList) {
+                    if (!operator.staffList.get(entry.getKey()).taskList.isEmpty()){
+                        System.out.println(entry.getKey());
+                        for (Task tsk : operator.staffList.get(entry.getKey()).taskList) {
 //                        System.out.println(tsk.getContent() + " " + tsk.getStartDate() + " " + tsk.getEndDate() + " " + tsk.getStatus());
-                    System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate().format( DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"))
-                                                        + " Complete " + tsk.getEndDate().format( DateTimeFormatter. ofPattern ("dd'.'MM'.'yyyy")));
+                            System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate().format( DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"))
+                                    + " Complete " + tsk.getEndDate().format( DateTimeFormatter. ofPattern ("dd'.'MM'.'yyyy")));
+                        }
                     }
                 }
                 return 1;
@@ -33,18 +35,19 @@ public class CommandFactory {
                 boolean checkPassed = false;
                 Scanner scan = new Scanner(System.in);
                 while (!checkPassed) {
-                    System.out.println("Введите имя пользователя");
+                    System.out.println("Введите имя пользователя (разрешены только буквы");
 //                    user = scan.nextLine();
                     checkPassed = Validator.nameCheck(user = scan.nextLine());
                 }
                 checkPassed = false;
                 while (!checkPassed){
-                    System.out.println("Введите пароль");
+                    System.out.println("Введите пароль (не менее 3-х символов)");
                     checkPassed = Validator.passCheck(pass = scan.nextLine());
                 }
                 checkPassed = false;
                 while (!checkPassed) {
                     System.out.println("Введите доступ");
+                    System.out.println ("ADMIN, SUPER, MIDDLE, JUNIOR, COMBINED");
                     try {
                         access = AccessLevel.valueOf(pass = scan.nextLine());
                         checkPassed = true;
@@ -75,7 +78,7 @@ public class CommandFactory {
                 tsk = scan.nextLine();
                 checkPassed = false;
                 while (!checkPassed) {
-                    System.out.println("Введите дату начала");
+                    System.out.println("Введите дату начала (dd.mm.yyyy)");
 //                    start = scan.nextLine();
 //                    checkPassed = Validator.dateCheck(start);
                 try {
@@ -89,7 +92,7 @@ public class CommandFactory {
 
                 checkPassed = false;
                 while (!checkPassed) {
-                    System.out.println("Введите дату окончания");
+                    System.out.println("Введите дату окончания (dd.mm.yyyy");
 //                    end = scan.nextLine();
 //                    checkPassed = Validator.dateCheck(end);
                 try {
