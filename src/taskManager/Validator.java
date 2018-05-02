@@ -2,6 +2,7 @@ package taskManager;
 
 import java.text.NumberFormat;
 import java.text.ParsePosition;
+import java.time.LocalDate;
 
 public class Validator {
 
@@ -19,6 +20,28 @@ public class Validator {
        }
        return true;
     }
+    static boolean dateCheck(LocalDate date){
+        if (date.isBefore(LocalDate.now())){
+            System.out.println("Дата начала не может быть в прошлом");
+            return false;
+        }
+        return true;
+    }
+    static boolean dateCheck(LocalDate begin, LocalDate end){
+        if (end.isBefore(begin)){
+            System.out.println("Дата окончания не может быть раньше даты начала");
+            return false;
+        }
+        return true;
+    }
+    static boolean passCheck(String pass){
+        if (pass.length() < 3){
+            System.out.println("Пароль не может быть короче 3-х символов");
+            return false;
+        }
+        return true;
+    }
+
 //    static boolean dateCheck(String date){
 //        String[] splitted = date.trim().split("\\.");
 //        if (splitted.length != 3

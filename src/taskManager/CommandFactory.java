@@ -28,22 +28,25 @@ public class CommandFactory {
         class CreateWorker implements Handler {
             @Override
             public int make(Staff operator) {
-                String pass, user = null;
+                String pass = null, user = null;
                 AccessLevel access = null;
                 boolean checkPassed = false;
                 Scanner scan = new Scanner(System.in);
                 while (!checkPassed) {
                     System.out.println("Введите имя пользователя");
-                    user = scan.nextLine();
-                    checkPassed = Validator.nameCheck(user);
+//                    user = scan.nextLine();
+                    checkPassed = Validator.nameCheck(user = scan.nextLine());
                 }
-                System.out.println("Введите пароль");
-                pass = scan.nextLine();
+                checkPassed = false;
+                while (!checkPassed){
+                    System.out.println("Введите пароль");
+                    checkPassed = Validator.passCheck(pass = scan.nextLine());
+                }
                 checkPassed = false;
                 while (!checkPassed) {
                     System.out.println("Введите доступ");
                     try {
-                        access = AccessLevel.valueOf(scan.nextLine());
+                        access = AccessLevel.valueOf(pass = scan.nextLine());
                         checkPassed = true;
                     }
                     catch (IllegalArgumentException e) {
@@ -77,7 +80,7 @@ public class CommandFactory {
 //                    checkPassed = Validator.dateCheck(start);
                 try {
                         start = LocalDate.parse(scan.nextLine(), DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"));
-                        checkPassed = true;
+                        checkPassed = Validator.dateCheck(start);
                     }
                 catch (DateTimeParseException e){
                         System.out.println("Некорректный формат даты!");
@@ -91,7 +94,7 @@ public class CommandFactory {
 //                    checkPassed = Validator.dateCheck(end);
                 try {
                     end = LocalDate.parse(scan.nextLine(), DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"));
-                    checkPassed = true;
+                    checkPassed = Validator.dateCheck(start, end);
                 }
                 catch (DateTimeParseException e){
                     System.out.println("Некорректный формат даты!");
