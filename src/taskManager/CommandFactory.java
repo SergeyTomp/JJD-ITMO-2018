@@ -35,7 +35,7 @@ public class CommandFactory {
                 boolean checkPassed = false;
                 Scanner scan = new Scanner(System.in);
                 while (!checkPassed) {
-                    System.out.println("Введите имя пользователя (разрешены только буквы");
+                    System.out.println("Введите имя пользователя (разрешены только буквы)");
 //                    user = scan.nextLine();
                     checkPassed = Validator.nameCheck(user = scan.nextLine());
                 }
