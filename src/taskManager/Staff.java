@@ -1,8 +1,9 @@
 package taskManager;
 
+import java.io.Serializable;
 import java.util.*;
 
-public class Staff{
+public class Staff implements Serializable {
 
     private String name;
     private String pass;

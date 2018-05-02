@@ -1,8 +1,9 @@
 package taskManager;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
-public class Task{
+public class Task implements Serializable {
 
     private String taskText;
 //    private String startDate;
