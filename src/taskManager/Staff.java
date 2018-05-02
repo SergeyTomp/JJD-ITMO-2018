@@ -2,10 +2,10 @@ package taskManager;
 
 import java.util.*;
 
-public class Staff {
+public class Staff{
 
-    protected String name;
-    protected String pass;
+    private String name;
+    private String pass;
     protected AccessLevel access;
     protected ArrayList<Task> taskList;
     protected Map <String, Staff> staffList;

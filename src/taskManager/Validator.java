@@ -19,22 +19,22 @@ public class Validator {
        }
        return true;
     }
-    static boolean dateCheck(String date){
-        String[] splitted = date.trim().split("\\.");
-        if (splitted.length != 3
-            || !isNumeric(splitted[0])
-            || !isNumeric(splitted[1])
-            || !isNumeric(splitted[2])
-            || Integer.parseInt(splitted [0]) <  1
-            || Integer.parseInt(splitted [0]) > 31
-            || Integer.parseInt(splitted [1]) <  1
-            || Integer.parseInt(splitted [1]) > 12
-            || Integer.parseInt(splitted [2]) <  1970
-            || Integer.parseInt(splitted [2]) > 2100) {
-            System.out.println("Некорректный формат даты!");
-            return false;
-        }
-        return true;
-    }
+//    static boolean dateCheck(String date){
+//        String[] splitted = date.trim().split("\\.");
+//        if (splitted.length != 3
+//            || !isNumeric(splitted[0])
+//            || !isNumeric(splitted[1])
+//            || !isNumeric(splitted[2])
+//            || Integer.parseInt(splitted [0]) <  1
+//            || Integer.parseInt(splitted [0]) > 31
+//            || Integer.parseInt(splitted [1]) <  1
+//            || Integer.parseInt(splitted [1]) > 12
+//            || Integer.parseInt(splitted [2]) <  1970
+//            || Integer.parseInt(splitted [2]) > 2100) {
+//            System.out.println("Некорректный формат даты!");
+//            return false;
+//        }
+//        return true;
+//    }
 
 }

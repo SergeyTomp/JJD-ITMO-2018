@@ -1,16 +1,17 @@
 package taskManager;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
-
 import static taskManager.AccessLevel.*;
 import static taskManager.CommandStrings.*;
 
-public class Company {
+public class Company implements Serializable {
 
-    public Map<String, Staff> staffList;
-    public Map <AccessLevel, ArrayList<CommandStrings>> accessTable;
+    protected Map <String, Staff> staffList;
+    protected Map <AccessLevel, ArrayList<CommandStrings>> accessTable;
+
 
     Company() {
         staffList = new HashMap<>();
@@ -51,5 +52,8 @@ public class Company {
             accessTable.get(JUNIOR).add(cs);
             accessTable.get(COMBINED).add(cs);
         }
+    }
+    Map <String, Staff> getStafflist (){
+        return staffList;
     }
 }

@@ -1,13 +1,31 @@
 package taskManager;
 
+import java.io.*;
 import java.util.Scanner;
 
-public class TaskProcessor {
+public class StartProcess {
 
-    public static void main (String[]args){
+    public static void main (String[]args) throws IOException, ClassNotFoundException {
+
+//        File dataBase = new File("dataBase.bin");
+//        Company ifmo;
+//        if(!dataBase.exists()) {
+//            ifmo = new Company();
+//        }
+//        else {
+//            try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(dataBase))){
+//                ifmo = (Company) ois.readObject();
+//            }
+//        }
 
         Company ifmo = new Company();
         Processor.initProcess(ifmo);
+//        try (ObjectOutputStream oouts = new ObjectOutputStream(new FileOutputStream(dataBase))){
+//            oouts.writeObject(ifmo);
+//        }
+        System.exit(0);
+
+
 //        Scanner scaner = new Scanner(System.in);
 //        boolean login = false;
 //        Staff operator = null;

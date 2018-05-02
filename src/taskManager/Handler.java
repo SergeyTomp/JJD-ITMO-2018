@@ -1,5 +1,5 @@
 package taskManager;
 
 public interface Handler {
-    boolean make(Staff user);
+    int make(Staff user);
 }

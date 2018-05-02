@@ -1,7 +1,9 @@
 package taskManager;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.*;
-import static taskManager.CommandStrings.*;
 import static taskManager.TaskStatus.*;
 
 
@@ -11,21 +13,21 @@ public class CommandFactory {
 
         class AllTasks implements Handler {
             @Override
-            public boolean make(Staff operator) {
+            public int make(Staff operator) {
                 for (Map.Entry entry : operator.staffList.entrySet()) {
                     System.out.println(entry.getKey());
                     for (Task tsk : operator.staffList.get(entry.getKey()).taskList) {
-                        System.out.println(tsk.getContent() + " " + tsk.getStartDate() + " " + tsk.getEndDate() + " " + tsk.getStatus());
-//                    System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate().format( DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"))
-//                                                        + " Complete " + tsk.getEndDate().format( DateTimeFormatter. ofPattern ("dd'.'MM'.'yyyy"));
+//                        System.out.println(tsk.getContent() + " " + tsk.getStartDate() + " " + tsk.getEndDate() + " " + tsk.getStatus());
+                    System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate().format( DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"))
+                                                        + " Complete " + tsk.getEndDate().format( DateTimeFormatter. ofPattern ("dd'.'MM'.'yyyy")));
                     }
                 }
-                return true;
+                return 1;
             }
         }
         class CreateWorker implements Handler {
             @Override
-            public boolean make(Staff operator) {
+            public int make(Staff operator) {
                 String pass, user = null;
                 AccessLevel access = null;
                 boolean checkPassed = false;
@@ -50,15 +52,15 @@ public class CommandFactory {
                     }
                 }
                 operator.staffList.put(user, new Staff(user, pass, access, operator.staffList, operator.accessTable));
-                return true;
+                return 1;
             }
         }
         class CreateTask implements Handler {
             @Override
-            public boolean make(Staff operator) {
-                String user = null, tsk, start = null, end = null;
-//            String user = null, tsk;
-//            LocalDate start = null, end = null;
+            public int make(Staff operator) {
+//                String user = null, tsk, start = null, end = null;
+            String user = null, tsk;
+            LocalDate start = null, end = null;
                 boolean checkPassed = false;
                 Scanner scan = new Scanner(System.in);
                 while (!checkPassed) {
@@ -69,31 +71,39 @@ public class CommandFactory {
                 System.out.println("Введите задачу");
                 tsk = scan.nextLine();
                 checkPassed = false;
-//            String tmp = null;
                 while (!checkPassed) {
                     System.out.println("Введите дату начала");
-//                tmp  = scan.nextLine();
-//                checkPassed = Validator.dateCheck(tmp);
-                    start = scan.nextLine();
-                    checkPassed = Validator.dateCheck(start);
+//                    start = scan.nextLine();
+//                    checkPassed = Validator.dateCheck(start);
+                try {
+                        start = LocalDate.parse(scan.nextLine(), DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"));
+                        checkPassed = true;
+                    }
+                catch (DateTimeParseException e){
+                        System.out.println("Некорректный формат даты!");
+                    }
                 }
-//            start = LocalDate.parse(tmp, DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"));
+
                 checkPassed = false;
                 while (!checkPassed) {
                     System.out.println("Введите дату окончания");
-//                tmp  = scan.nextLine();
-//                checkPassed = Validator.dateCheck(tmp);
-                    end = scan.nextLine();
-                    checkPassed = Validator.dateCheck(end);
+//                    end = scan.nextLine();
+//                    checkPassed = Validator.dateCheck(end);
+                try {
+                    end = LocalDate.parse(scan.nextLine(), DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"));
+                    checkPassed = true;
                 }
-//             end = LocalDate.parse(tmp, DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"));
+                catch (DateTimeParseException e){
+                    System.out.println("Некорректный формат даты!");
+                }
+                }
                 operator.staffList.get(user).taskList.add(new Task(tsk, start, end, NEW));
-                return true;
+                return 1;
             }
         }
         class DeleteTask implements Handler {
             @Override
-            public boolean make(Staff operator) {
+            public int make(Staff operator) {
                 String user = null, tsk;
                 Scanner scan = new Scanner(System.in);
                 boolean checkPassed = false;
@@ -121,12 +131,12 @@ public class CommandFactory {
                         System.out.println("Задача не найдена!");
                     }
                 }
-                return true;
+                return 1;
             }
         }
         class RemoveWorker implements Handler {
             @Override
-            public boolean make(Staff operator) {
+            public int make(Staff operator) {
                 String user = null;
                 Scanner scan = new Scanner(System.in);
                 boolean checkPassed = false;
@@ -138,12 +148,12 @@ public class CommandFactory {
                     }
                 }
                 operator.staffList.remove(user);
-                return true;
+                return 1;
             }
         }
         class ChangeStat implements Handler {
             @Override
-            public boolean make(Staff operator) {
+            public int make(Staff operator) {
                 String user = null, tsk;
                 Scanner scan = new Scanner(System.in);
                 boolean checkPassed = false;
@@ -183,87 +193,88 @@ public class CommandFactory {
                         System.out.println("Некорректный идентификатор статуса!");
                     }
                 }
-                return true;
+                return 1;
             }
         }
         class Close implements Handler {
             @Override
-            public boolean make(Staff operator) {
-                System.exit(0);
-                return true;
+            public int make(Staff operator) {
+
+//                System.exit(0);
+                return -1;
             }
         }
         class Exit implements Handler {
             @Override
-            public boolean make(Staff operator) {
-                return false;
+            public int make(Staff operator) {
+                return 0;
             }
         }
         class ComList implements Handler {
             @Override
-            public boolean make(Staff operator) {
+            public int make(Staff operator) {
                 for (CommandStrings com : operator.accessTable.get(operator.access)) {
                     System.out.println(com);
                 }
-                return true;
+                return 1;
             }
         }
         class ShowNew implements Handler {
             @Override
-            public boolean make(Staff operator) {
+            public int make(Staff operator) {
                 for (Task tsk : operator.taskList) {
                     if (tsk.getStatus().equals(NEW)) {
-                        System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate() + " Complete " + tsk.getEndDate());
-//                    System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate().format( DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"))
-//                                                        + " Complete " + tsk.getEndDate().format( DateTimeFormatter. ofPattern ("dd'.'MM'.'yyyy"));
+//                        System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate() + " Complete " + tsk.getEndDate());
+                    System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate().format( DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"))
+                                                        + " Complete " + tsk.getEndDate().format( DateTimeFormatter. ofPattern ("dd'.'MM'.'yyyy")));
                     }
                 }
-                return true;
+                return 1;
             }
         }
         class ShowDone implements Handler {
             @Override
-            public boolean make(Staff operator) {
+            public int make(Staff operator) {
                 for (Task tsk : operator.taskList) {
                     if (tsk.getStatus().equals(DONE)) {
-                        System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate() + " Complete " + tsk.getEndDate());
-//                    System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate().format( DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"))
-//                                                        + " Complete " + tsk.getEndDate().format( DateTimeFormatter. ofPattern ("dd'.'MM'.'yyyy"));
+//                        System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate() + " Complete " + tsk.getEndDate());
+                    System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate().format( DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"))
+                                                        + " Complete " + tsk.getEndDate().format( DateTimeFormatter. ofPattern ("dd'.'MM'.'yyyy")));
                     }
                 }
-                return true;
+                return 1;
             }
 
         }
         class InWork implements Handler {
             @Override
-            public boolean make(Staff operator) {
+            public int make(Staff operator) {
                 for (Task tsk : operator.taskList) {
                     if (tsk.getStatus().equals(IN_WORK)) {
-                        System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate() + " Complete " + tsk.getEndDate());
-//                    System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate().format( DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"))
-//                                                        + " Complete " + tsk.getEndDate().format( DateTimeFormatter. ofPattern ("dd'.'MM'.'yyyy"));
+//                        System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate() + " Complete " + tsk.getEndDate());
+                    System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate().format( DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"))
+                                                        + " Complete " + tsk.getEndDate().format( DateTimeFormatter. ofPattern ("dd'.'MM'.'yyyy")));
                     }
                 }
-                return true;
+                return 1;
             }
         }
         class Checked implements Handler {
             @Override
-            public boolean make(Staff operator) {
+            public int make(Staff operator) {
                 for (Task tsk : operator.taskList) {
                     if (tsk.getStatus().equals(CHECKED)) {
-                        System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate() + " Complete " + tsk.getEndDate());
-//                    System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate().format( DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"))
-//                                                        + " Complete " + tsk.getEndDate().format( DateTimeFormatter. ofPattern ("dd'.'MM'.'yyyy"));
+//                        System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate() + " Complete " + tsk.getEndDate());
+                    System.out.println(tsk.getContent() + " Begin " + tsk.getStartDate().format( DateTimeFormatter.ofPattern ("dd'.'MM'.'yyyy"))
+                                                        + " Complete " + tsk.getEndDate().format( DateTimeFormatter. ofPattern ("dd'.'MM'.'yyyy")));
                     }
                 }
-                return true;
+                return 1;
             }
         }
         class Take implements Handler {
             @Override
-            public boolean make(Staff operator) {
+            public int make(Staff operator) {
                 Scanner scaner = new Scanner(System.in);
                 System.out.println("Введите задачу");
                 String str = scaner.nextLine();
@@ -273,13 +284,13 @@ public class CommandFactory {
                         System.out.println("Статус: в работе");
                     }
                 }
-                return true;
+                return 1;
             }
 
         }
         class Complete implements Handler {
             @Override
-            public boolean make(Staff operator) {
+            public int make(Staff operator) {
                 Scanner scaner = new Scanner(System.in);
                 System.out.println("Введите задачу");
                 String str = scaner.nextLine();
@@ -289,14 +300,14 @@ public class CommandFactory {
                         System.out.println("completed");
                     }
                 }
-                return true;
+                return 1;
             }
         }
         class IllegalCommand implements Handler{
             @Override
-            public boolean make(Staff operator) {
+            public int make(Staff operator) {
                 System.out.println("Команда не существует");
-                return true;
+                return 1;
             }
         }
 
