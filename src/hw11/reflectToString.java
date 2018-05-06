@@ -10,11 +10,15 @@ public class reflectToString {
         String className = unknownClass.getSimpleName();
         Field[] allFields = unknownClass.getDeclaredFields();
         StringBuilder sb = new StringBuilder();
-        sb.append("\n").append(className).append(" fields:").append("\n\n");
+        sb.append("\n")
+                .append(className)
+                .append(" fields:")
+                .append("\n\n");
         for (Field field : allFields){
             field.setAccessible(true);
-            Exclude annotation = field.getAnnotation(Exclude.class);
-            if (annotation == null || annotation.exclude().equals(Exclude.Define.NO)){
+            if (!field.isAnnotationPresent(Exclude.class) || field.getAnnotation(Exclude.class).exclude().equals(Exclude.Define.NO)){
+//            Exclude annotation = field.getAnnotation(Exclude.class); //так тратим время на получение ссылки, если аннотации нет
+//            if (annotation == null || annotation.exclude().equals(Exclude.Define.NO)){ //после чего тратим время на проверку наличия
                 sb.append(field.getType().getSimpleName())
                         .append(" ")
                         .append(field.getName())
