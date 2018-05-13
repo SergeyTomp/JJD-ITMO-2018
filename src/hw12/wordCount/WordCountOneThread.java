@@ -1,4 +1,4 @@
-package hw12;
+package hw12.wordCount;
 
 import java.io.BufferedReader;
 import java.io.InputStream;
@@ -23,19 +23,17 @@ public class WordCountOneThread {
         long startTime = System.currentTimeMillis();
 
         for (String line : lines) {
-            if (!line.isEmpty()){ // пришлось добавить эту проверку - при числе пустых строк подряд > 3 почему-то считает пробелы словами
-                String[] delWaste = line.toLowerCase()
-                        .replaceAll("'t"," ")
-                        .replaceAll("[\\p{Punct}\\d]+"," ")
-                        .trim()
-                        .split("\\s+");
-                for (int i = 0; i < delWaste.length; i++) {
-                    if (wordCnt.containsKey(delWaste[i])){
-                        wordCnt.put(delWaste[i], wordCnt.get(delWaste[i]) + 1);
-                    }
-                    else {
-                        if (delWaste[i] != ""){wordCnt.put(delWaste[i], 1);}
-                    }
+            String[] delWaste = line.toLowerCase()
+                    .replaceAll("'t"," ")
+                    .replaceAll("[\\p{Punct}\\d]+"," ")
+                    .trim()
+                    .split("\\s+");
+            for (int i = 0; i < delWaste.length; i++) {
+                if (wordCnt.containsKey(delWaste[i])){
+                    wordCnt.put(delWaste[i], wordCnt.get(delWaste[i]) + 1);
+                }
+                else {
+                    if (!delWaste[i].equals("")){wordCnt.put(delWaste[i], 1);}
                 }
             }
         }

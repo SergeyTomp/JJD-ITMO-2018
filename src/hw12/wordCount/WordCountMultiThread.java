@@ -1,4 +1,4 @@
-package hw12;
+package hw12.wordCount;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -12,7 +12,7 @@ import static java.util.stream.Collectors.toList;
 public class WordCountMultiThread {
 
     private static Map<String, Integer> result = new HashMap<>();
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws InterruptedException {
 
         InputStream in = WordCountMultiThread.class.getClassLoader().getResourceAsStream("wap.txt");
         BufferedReader rdr = new BufferedReader(new InputStreamReader(in));
@@ -30,7 +30,7 @@ public class WordCountMultiThread {
         //разделяем lines на равные части числом cpus
         long startTime = System.currentTimeMillis();
         for (int i = 0; i < cpus; i++) {
-            if (!(i != (cpus - 1))) {
+            if ((i != (cpus - 1))) {
                 wct = new WordCountThread(lines.subList(i * partition, (i + 1) * partition));
             }
             else {
@@ -63,7 +63,7 @@ public class WordCountMultiThread {
         private List<String> lines;
         private Map<String, Integer> wordCnt = new HashMap<>();
 
-        public WordCountThread(List<String> lines) {
+        WordCountThread(List<String> lines) {
             this.lines = lines;
                     }
         @Override
@@ -72,20 +72,18 @@ public class WordCountMultiThread {
             // Считаем в wordCnt
             int delWasteSise = 0;
             for (String line : lines) {
-                if (!line.isEmpty()){ // пришлось добавить эту проверку - при числе пустых строк подряд > 3 почему-то считает пробелы словами
-                    String [] delWaste = line.toLowerCase()
-                            .replaceAll("'t"," ")
-                            .replaceAll("[\\p{Punct}\\d]+"," ")
-                            .trim()
-                            .split("\\s+");
-                    delWasteSise = delWasteSise + delWaste.length;
-                    for (int i = 0; i < delWaste.length; i++) {
-                        if (wordCnt.containsKey(delWaste[i])){
-                            wordCnt.put(delWaste[i], wordCnt.get(delWaste[i]) + 1);
-                        }
-                        else {
-                            if (delWaste[i] != ""){wordCnt.put(delWaste[i], 1);}
-                        }
+                String [] delWaste = line.toLowerCase()
+                        .replaceAll("'t"," ")
+                        .replaceAll("[\\p{Punct}\\d]+"," ")
+                        .trim()
+                        .split("\\s+");
+                delWasteSise = delWasteSise + delWaste.length;
+                for (int i = 0; i < delWaste.length; i++) {
+                    if (wordCnt.containsKey(delWaste[i])){
+                        wordCnt.put(delWaste[i], wordCnt.get(delWaste[i]) + 1);
+                    }
+                    else {
+                        if (!delWaste[i].equals("")){wordCnt.put(delWaste[i], 1);}
                     }
                 }
             }
