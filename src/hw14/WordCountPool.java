@@ -91,15 +91,24 @@ public class WordCountPool {
                         .replaceAll("[\\p{Punct}\\d]+", " ")
                         .trim()
                         .split("\\s+");
-                for (String delwaste : delWaste) {
-                    if (wordCnt.containsKey(delwaste)) {
-                        wordCnt.put(delwaste, wordCnt.get(delwaste) + 1);
-                    } else {
-                        if (!delwaste.equals("")) {
-                            wordCnt.put(delwaste, 1);
+
+                for (String delwaste : delWaste){
+                    wordCnt.merge(delwaste, 1, new BiFunction<Integer, Integer, Integer>() {
+                        @Override
+                        public Integer apply(Integer integer, Integer integer2) {
+                            return integer + integer2;
                         }
-                    }
+                    });
                 }
+//                for (String delwaste : delWaste) {
+//                    if (wordCnt.containsKey(delwaste)) {
+//                        wordCnt.put(delwaste, wordCnt.get(delwaste) + 1);
+//                    } else {
+//                        if (!delwaste.equals("")) {
+//                            wordCnt.put(delwaste, 1);
+//                        }
+//                    }
+//                }
             }
             System.out.println(Thread.currentThread().getName() + "is terminated");
             return wordCnt;
