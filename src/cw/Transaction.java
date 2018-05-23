@@ -21,6 +21,7 @@ public class Transaction implements Runnable{
         synchronized (srcAccID.accID < dstAccID.accID ? srcAccID : dstAccID) {
             synchronized (srcAccID.accID < dstAccID.accID ? dstAccID : srcAccID){
                 bank.bankTransferMoney(srcAccID, dstAccID, amount);
+
             }
         }
     }
