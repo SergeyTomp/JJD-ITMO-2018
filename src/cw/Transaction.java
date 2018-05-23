@@ -18,13 +18,10 @@ public class Transaction implements Runnable{
 
     @Override
     public void run() {
-        while (!Thread.currentThread().isInterrupted()){
-                synchronized (bank) {
-                    if (bank.transOpen == IDLE) {
-                        bank.bankTransferMoney(srcAccID, dstAccID, amount);
-                    }
-                }
-            bank.notify();
+        synchronized (bank) {
+            if (bank.transOpen == IDLE) {
+                bank.bankTransferMoney(srcAccID, dstAccID, amount);
+            }
         }
     }
 }
