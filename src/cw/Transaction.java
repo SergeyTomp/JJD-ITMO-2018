@@ -1,7 +1,5 @@
 package cw;
 
-import static cw.TransPermit.IDLE;
-
 public class Transaction implements Runnable{
     private long transID;
     private final Account srcAccID;
