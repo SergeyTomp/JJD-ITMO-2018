@@ -3,11 +3,11 @@ package cw;
 import static cw.TransPermit.IDLE;
 
 public class Transaction implements Runnable{
-    long transID;
-    Account srcAccID;
-    Account dstAccID;
-    int amount;
-    Bank bank;
+    private long transID;
+    private final Account srcAccID;
+    private final Account dstAccID;
+    private int amount;
+    private Bank bank;
 
     public Transaction (long transID, Account srcAccID, Account dstAccID, int amount, Bank bank) {
         this.transID = transID;
@@ -18,13 +18,10 @@ public class Transaction implements Runnable{
 
     @Override
     public void run() {
-        while (!Thread.currentThread().isInterrupted()){
-                synchronized (bank) {
-                    if (bank.transOpen == IDLE) {
-                        bank.bankTransferMoney(srcAccID, dstAccID, amount);
-                    }
-                }
-            bank.notify();
+        synchronized (srcAccID.accID < dstAccID.accID ? srcAccID : dstAccID) {
+            synchronized (srcAccID.accID < dstAccID.accID ? dstAccID : srcAccID){
+                bank.bankTransferMoney(srcAccID, dstAccID, amount);
+            }
         }
     }
 }
