@@ -1,26 +1,35 @@
 package cw;
 
-public class Transaction implements Runnable{
-    private long transID;
-    private final Account srcAccID;
-    private final Account dstAccID;
-    private int amount;
-    private Bank bank;
+public class Transaction{
+    long transID;
+    final Account srcAccID;
+    final Account dstAccID;
+    int amount;
+    Bank bank;
 
     public Transaction (long transID, Account srcAccID, Account dstAccID, int amount, Bank bank) {
         this.transID = transID;
         this.srcAccID = srcAccID;
         this.dstAccID = dstAccID;
         this.amount = amount;
+        this.bank = bank;
+    }
+    public int getAmount() {
+        return amount;
+    }
+    public Account getSrcAccID() {
+
+        return srcAccID;
+    }
+    public Account getDstAccID() {
+        return dstAccID;
     }
 
-    @Override
-    public void run() {
-        synchronized (srcAccID.accID < dstAccID.accID ? srcAccID : dstAccID) {
-            synchronized (srcAccID.accID < dstAccID.accID ? dstAccID : srcAccID){
-                bank.bankTransferMoney(srcAccID, dstAccID, amount);
+    public void setTransID(long transID) {
+        this.transID = transID;
+    }
 
-            }
-        }
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 }

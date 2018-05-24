@@ -1,27 +1,42 @@
 package cw;
 
-import java.util.Map;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.LinkedBlockingQueue;
 
 public class Bank {
 
-    private Map <Account, User> accList;
+    List<Account> accList = new ArrayList<>();
+    BlockingQueue<Transaction> queue = new LinkedBlockingQueue<>();
 
-    public Bank(Map<Account, User> accList) {
-        this.accList = accList;
-    }
+    boolean bankTransferMoney (Transaction task){
 
-    boolean bankTransferMoney (Account src, Account dst, int value){
-        if (src.amount >= 0 && src != dst){
-            src.amount = src.amount - value;
-            dst.amount = dst.amount + value;
+        if (task.amount > 0 && task.getSrcAccID() != task.getDstAccID() && task.amount != 0){
+            task.srcAccID.amount -= task.amount;
+            task.dstAccID.amount += task.amount;
+            System.out.println(Thread.currentThread().getName() +
+                    " Сообщение для клиента: " +
+                    task.srcAccID.client.userMail +
+                    " Перевод на сумму " + task.getAmount() +
+                    " произведён! Остаток " +
+                    task.srcAccID.amount);
             return true;
         }
-        else {
-            System.out.println("Сообщение для клиента: " + src.client.userMail + "На счёте недостаточно средств!");
+            System.out.println("Сообщение для клиента: " +
+                    task.srcAccID.client.userMail +
+                    " На счёте недостаточно средств!");
             return false;
-        }
     }
-    public void addClient (User usr, Account acc){
-        accList.put(acc, usr);
+    public void addClient (Account acc){
+        accList.add(acc);
+    }
+
+    public BlockingQueue<Transaction> getQueue() {
+        return queue;
+    }
+
+    public List<Account> getAccList() {
+        return accList;
     }
 }
